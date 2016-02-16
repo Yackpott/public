@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def symbol_to_path(symbol, base_dir="data"):
     """Return CSV file path given ticker symbol."""
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
@@ -17,7 +18,7 @@ def get_data(symbols, dates):
 
     for symbol in symbols:
         df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date',
-                parse_dates=True, usecols=['Date', 'Adj Close'], na_values=['nan'])
+                              parse_dates=True, usecols=['Date', 'Adj Close'], na_values=['nan'])
         df_temp = df_temp.rename(columns={'Adj Close': symbol})
         df = df.join(df_temp)
         if symbol == 'SPY':  # drop dates SPY did not trade
@@ -44,11 +45,10 @@ def get_rolling_std(values, window):
     return pd.rolling_std(values, window=window)
 
 
-
 def get_bollinger_bands(rm, rstd):
     """Return upper and lower Bollinger Bands."""
-    upper_band = rm + 2*rstd
-    lower_band = rm - 2*rstd
+    upper_band = rm + 2 * rstd
+    lower_band = rm - 2 * rstd
     return upper_band, lower_band
 
 
@@ -67,7 +67,7 @@ def test_run():
 
     # 3. Compute upper and lower bands
     upper_band, lower_band = get_bollinger_bands(rm_SPY, rstd_SPY)
-    
+
     # Plot raw SPY values, rolling mean and Bollinger Bands
     ax = df['SPY'].plot(title="Bollinger Bands", label='SPY')
     rm_SPY.plot(label='Rolling mean', ax=ax)

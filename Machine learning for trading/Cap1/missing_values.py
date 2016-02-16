@@ -5,10 +5,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
+
 def fill_missing_values(df_data):
     """Fill missing values in data frame, in place."""
     df_data.fillna(method="ffill", inplace=True)
     df_data.fillna(method="bfill", inplace=True)
+    # fill fordward fillna(method='pad')
+    # fill backward fillna(method='bfill')
 
 
 def symbol_to_path(symbol, base_dir="data"):
@@ -25,7 +28,7 @@ def get_data(symbols, dates):
     for symbol in symbols:
         file_path = symbol_to_path(symbol)
         df_temp = pd.read_csv(file_path, parse_dates=True, index_col="Date",
-            usecols=["Date", "Adj Close"], na_values=["nan"])
+                              usecols=["Date", "Adj Close"], na_values=["nan"])
         df_temp = df_temp.rename(columns={"Adj Close": symbol})
         df_final = df_final.join(df_temp)
         if symbol == "SPY":  # drop dates SPY did not trade

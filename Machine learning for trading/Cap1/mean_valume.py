@@ -15,8 +15,8 @@ def get_mean_volume(symbol):
 def test_run():
     """Function called by Test Run."""
     for symbol in ['AAPL', 'IBM']:
-        print "Mean Volume"
-        print symbol, get_mean_volume(symbol)
+        print("Mean Volume")
+        print(symbol, get_mean_volume(symbol))
 
 
 if __name__ == "__main__":

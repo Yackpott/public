@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 def plot_selected(df, columns, start_index, end_index):
     """Plot the desired columns over index values in the given range."""
-    #df.ix[start_index:end_index,columns]
+    # df.ix[start_index:end_index,columns]
     plot_data(df[columns][start_index:end_index])
 
 
@@ -24,7 +24,7 @@ def get_data(symbols, dates):
 
     for symbol in symbols:
         df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date',
-                parse_dates=True, usecols=['Date', 'Adj Close'], na_values=['nan'])
+                              parse_dates=True, usecols=['Date', 'Adj Close'], na_values=['nan'])
         df_temp = df_temp.rename(columns={'Adj Close': symbol})
         df = df.join(df_temp)
         if symbol == 'SPY':  # drop dates SPY did not trade
@@ -35,7 +35,7 @@ def get_data(symbols, dates):
 
 def normalize_data(df):
     # df/df[0]
-    return df/df.ix[0, :]
+    return df / df.ix[0, :]
 
 
 def plot_data(df, title="Stock prices"):
@@ -52,7 +52,7 @@ def test_run():
 
     # Choose stock symbols to read
     symbols = ['GOOG', 'IBM', 'GLD']  # SPY will be added in get_data()
-    
+
     # Get stock data
     df = get_data(symbols, dates)
 

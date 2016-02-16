@@ -3,6 +3,7 @@
 import os
 import pandas as pd
 
+
 def symbol_to_path(symbol, base_dir="data"):
     """Return CSV file path given ticker symbol."""
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
@@ -19,7 +20,7 @@ def get_data(symbols, dates):
                              index_col="Date", parse_dates=True, usecols=["Date", "Adj Close"],
                              na_values=["nan"]
                              )
-        dftemp = dftemp.rename(columns={"Adj Close":symbol})
+        dftemp = dftemp.rename(columns={"Adj Close": symbol})
         df = df.join(dftemp, how="inner")
 
     return df
@@ -31,7 +32,7 @@ def test_run():
 
     # Choose stock symbols to read
     symbols = ['GOOG', 'IBM', 'GLD']
-    
+
     # Get stock data
     df = get_data(symbols, dates)
     print df

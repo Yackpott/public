@@ -3,12 +3,14 @@ import matplotlib.pyplot as plt
 
 from util import get_data, plot_data
 
+
 def compute_daily_returns(df):
     """ Compute and return the daily return values """
     daily_returns = df.copy()
-    daily_returns[1:] = (df[1:]/ df[:-1].values) - 1
-    daily_returns.ix[0, :] = 0 # set daily returns for row 0 to 0
-    returns daily_returns
+    daily_returns[1:] = (df[1:] / df[:-1].values) - 1
+    daily_returns.ix[0, :] = 0  # set daily returns for row 0 to 0
+    return daily_returns
+
 
 def test_run():
     # Read data
@@ -20,15 +22,15 @@ def test_run():
     daily_returns = compute_daily_returns(df)
 
     # Plot a histogram
-    daily_returns.hist(bins=20) # changing numbert of bin to 20
-    
+    daily_returns.hist(bins=20)  # changing numbert of bin to 20
+
     mean = daily_returns["SPY"].mean()
     print(mean)
     std = daily_returns["SPY"].std()
 
-    plt.axvline(mean, color="w"), linestyle="dashed", linewidth=2)
-    plt.axvline(std, color="w"), linestyle="dashed", linewidth=2)
-    plt.axvline(-std, color="w"), linestyle="dashed", linewidth=2)
+    plt.axvline(mean, color="w", linestyle="dashed", linewidth=2)
+    plt.axvline(std, color="w", linestyle="dashed", linewidth=2)
+    plt.axvline(-std, color="w", linestyle="dashed", linewidth=2)
     plt.show()
 
     # 2 plots
