@@ -1,13 +1,11 @@
-import hashlib
-import random
+import crypto
 import string
 
 
-def salt():
-    n = 64
+def salt(n=64):
     let = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    return ''.join(random.SystemRandom().choice(let)for _ in range(n))
+    return ''.join(crypto.choice(let)for _ in range(n))
 
 
 def hash(clave, salt):
-    return hashlib.sha256((clave + salt).encode()).hexdigest()
+    return crypto.sha256((clave + salt).encode()).hexdigest()
