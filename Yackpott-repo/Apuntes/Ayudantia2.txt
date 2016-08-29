@@ -1,0 +1,19 @@
+a = [i for i in range(10) if i % 2 == 0]
+a = [i if i % 2 == 0 else 0 for i in range(10)]
+
+from personal import *
+
+si chocha se relaciona con el ultimo
+
+from . import animal
+
+animal = aninaml.Animal()
+
+^ XOR
+true ^ true FALSE
+true ^ false TRUE
+
+.copy() copia en otra direccion de memoria
+
+fifo colas queues
+lifo pilas stacks

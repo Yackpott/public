@@ -1,0 +1,13 @@
+daemon = True se ejecuta hasta q termine el hilo principal
+sin eso se queda corriendo para siempre
+
+si ejecuto una funcion abajo de la funcion del thread esta pertenece al thread
+
+lock
+poner funciones atomicas adentros
+no poner thread dentro de los lock error muy comun
+recursos compratidos
+ejemplo productor y consumidor
+deadlocks q uno necesite al otro y q el otro lo necesite otro
+q uno llame a alock y despues block y otro llame a block y despues a alock
+usar algoritmo del banquero para saber si pueden haber deadlocks

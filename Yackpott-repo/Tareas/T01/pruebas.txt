@@ -1,0 +1,9 @@
+[
+L6	catedra	 sala:D306, 
+W6	catedra	 sala:D306, 
+V6	ayudantia	 sala:CS301][
+L5	catedra	 sala:B14, 
+W5	catedra	 sala:B14, 
+V5	ayudantia	 sala:CS303][
+V3	catedra	 sala:(Por Asignar), 
+V4	catedra	 sala:(Por Asignar)]

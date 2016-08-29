@@ -1,0 +1,70 @@
+Cuando se crea la clase A, al haberse declarado una metaclase para A, se ejecutarán los métodos __new__ e __init__ (en ese orden). Los argumentos que reciben son:
+
+Para __new__:
+
+cls es la propia metaclase Meta (que es quien va a modificar la clase a ser creada).
+name es el nombre de la clase a ser creada
+bases son las clases de las cuales hereda la clase a ser creada
+attr es el diccionario de atributos (y métodos)
+Para __init__:
+
+cls NO ES la metaclase Meta, sino la clase que retornó __new__, la que acaba de ser creada. Esta clase, en tu ejemplo, es la que tiene modificado el atributo name.
+name es el nombre de la clase a ser creada, pero es el mismo nombre que recibió anteriormente el new
+bases son las clases de la cual hereda la clase a ser creada, pero es el mismo valor que recibió anteriormente el new
+attr es el diccionario de atributos (y métodos). Este sí viene modificado, con las actualizaciones que se le hicieron en el __new__. Es decir, este sí es el nuevo diccionario de atributos de la clase que ha sido creada.
+Así, por ejemplo, si ejecutas el siguiente código en vez del anterior:
+
+# Clase que sera subclaseada
+class B: pass
+
+class Meta(type):
+    def __new__(cls, name, bases, attr):
+        print(1)
+        print(cls)
+        name = "A_class_named_" + name
+        bases = (B,)  # la estoy obligando a heredar de B
+        attr['nuevo'] = 1
+        return super().__new__(cls, name, bases, attr)
+
+    def __init__(cls, name, bases, attr):
+        print(2)
+        print(cls, cls.__name__)
+        #name es el mismo que recibio __new__
+        #bases tambien: es (), pero cls si hereda de B
+        #attr fue modificado, pues tiene la key "nuevo"
+        print(name, bases, attr) 
+        print('¡I am still called ' + name + ' in init!')
+        return super().__init__(name, bases, attr)
+
+# Clase a ser creada con Meta
+class A(metaclass=Meta): pass
+
+#Esto muestra que A si hereda de B
+print(A.__mro__)
+El output en consola es:
+
+1
+<class '__main__.Meta'>
+2
+<class '__main__.A'> A_class_named_A
+A () {'__module__': '__main__', 'nuevo': 1, '__qualname__': 'A'}
+¡I am still called A in init!
+(<class '__main__.A'>, <class '__main__.B'>, <class 'object'>)
+Espero que haya quedado claro! Si quieres saber un poco más, la razón por la cual el attr que recibe el __new__ viene modificado es que las funciones reciben a los diccionarios por referencia, pero si redefines una variable entera o tupla dentro de la función, esta no se modifica afuera. Esto queda claro con el siguiente código:
+
+def fdic(dic):
+        dic['robot'] = 'robocop6'
+
+def fint(num):
+        #hacer cosas
+        num += 1
+        #hacer otras cosas
+
+d = {}
+fdic(d)
+print(d)  #esto imprime {'robot': 'robocop6'}
+
+i = 1
+fint(i)
+print(i)   #esto imprime 1
+Entonces, cuando __new__ recibe a name, bases, attr, y adentro redefine las variables name, bases, estas modificaciones solo existen en el scope de __new__ y por lo tanto, __init__ las recibe sin las modificaciones. Pero al modificar attr se modificó el objeto diccionario, y este mismo objeto fue el que se envió a __init__ posteriormente, por lo cual el attr que recibe __init__ sí incluye los cambios.

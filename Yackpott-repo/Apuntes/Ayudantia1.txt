@@ -1,0 +1,58 @@
+Ayudantia 1:
+commit = foto del codigo
+se conecta con un servidor
+
+git clone url
+cd tab
+ls
+open
+cd ..
+git status (ver ultimo cambio)
+git add archivo
+git add --all
+git commit -m "Mensaje"
+git status (no ha cambiado nada desde el ultimo commit)
+(aun no esta en la red)
+git push
+
+(bajar ultima version)
+git pull --rebase
+
+Usar PEP8
+	dos espacios entre clases, uno entre funciones
+	tab o espacios y ser congruentes
+	CuerpoCelestial
+	variable_1
+
+3 opciones composicion rombo blanco, negro y agregacion flecha
+
+rombo va del chico al grande
+rombo blanco si destruyo la sala no se destruyen los alumnos
+rombo negro si al destruir el grande destruyo el chico
+
+4 flecha blanca herencia subclase a superclase
+
+partir listas como None
+
+self.observacion = observacion if observacion else []
+
+Herencia:
+algo mas general AC1 cuerpos celeste
+para no repetir codigo
+
+class Estrella(CuerpoCeleste):
+	def __init__(self, tipo, posicion, observacion=None):
+		super.__init__(posicion,observacion)
+
+como init esta cambiado entonces tengo que poner super.__init__(posicion,observacion)
+
+Override:
+
+	class sol:
+		def observar(self):
+		super().observar() # llama al metodo de la superclase
+		print("aaahhjjjj") # lo otro q se quiere agregar
+
+**kwargs
+diccionario
+f(**kwargs)
