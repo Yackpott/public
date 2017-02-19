@@ -10,8 +10,8 @@ map_fn = tf.python.functional_ops.map_fn
 ##                           GRAPH DEFINITION                                 ##
 ################################################################################
 
-INPUT_SIZE = 2       # 2 bits per timestep
-OUTPUT_SIZE = 1       # 1 bit per timestep
+INPUT_SIZE = 10       # 10 bits per timestep
+OUTPUT_SIZE = 2       # 2 bit per timestep
 RNN_HIDDEN = 20
 BATCH_SIZE = 16
 TINY = 1e-6    # to avoid NaNs in logs
@@ -53,11 +53,9 @@ accuracy = tf.reduce_mean(tf.cast(tf.abs(outputs - predicted_outputs) < 0.5, DTY
 ##                           TRAINING LOOP                                    ##
 ################################################################################
 
-NUM_BITS = 10
 ITERATIONS_PER_EPOCH = 100
 
 session = tf.Session()
-# For some reason it is our job to do this:
 session.run(tf.initialize_all_variables())
 
 for epoch in range(1000):
