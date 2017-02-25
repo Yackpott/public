@@ -1,0 +1,24 @@
+{
+  "name": "instabot",
+  "version": "1.0.0",
+  "description": "get users photos",
+  "main": "instabot.js",
+  "dependencies": {
+    "regex": "^0.1.1",
+    "requestify": "^0.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "insta",
+    "instagram",
+    "user",
+    "users",
+    "photo",
+    "photos"
+  ],
+  "author": "rodolfo blanco",
+  "license": "ISC"
+}
